@@ -25,7 +25,6 @@ public class IfSpecimenIsThere extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         waitForStart();
-
         encoderDrive(DRIVE_SPEED, 23.5, 23.5, 15);
     }
 
