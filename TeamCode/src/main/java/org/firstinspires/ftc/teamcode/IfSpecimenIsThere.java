@@ -10,22 +10,31 @@ public class IfSpecimenIsThere extends LinearOpMode {
 
     DcMotor leftDrive, rightDrive;
 
-    static final double     COUNTS_PER_MOTOR_REV    = 1538 ;    // eg: TETRIX Motor Encoder
+    static final double     COUNTS_PER_MOTOR_REV    = 537.689 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
+    private ElapsedTime     runtime = new ElapsedTime();
 
-    private ElapsedTime runtime = new ElapsedTime();
 
 
     @Override
     public void runOpMode() throws InterruptedException {
 
+        leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
+
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         waitForStart();
-        encoderDrive(DRIVE_SPEED, 23.5, 23.5, 15);
+        encoderDrive(DRIVE_SPEED, 5, -5, 5);
     }
 
     public void encoderDrive(double speed,
@@ -77,7 +86,7 @@ public class IfSpecimenIsThere extends LinearOpMode {
             leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(250);   // optional pause after each move.
+            //sleep(250);   // optional pause after each move.
         }
     }
 }
